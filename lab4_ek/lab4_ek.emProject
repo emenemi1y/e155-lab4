@@ -44,7 +44,12 @@
       project_type="Executable"
       target_reset_script="Reset();" />
     <folder Name="CMSIS Files">
+      <file file_name="STM32L432KC_GPIO.c" />
+      <file file_name="STM32L432KC_GPIO.h" />
       <file file_name="STM32L432KC_RCC.h" />
+      <file file_name="STM32L432KC_TIM15.c" />
+      <file file_name="STM32L432KC_TIM15.h" />
+      <file file_name="STM32L432KC_TIM16.h" />
       <file file_name="STM32L4xx/Device/Include/stm32l4xx.h" />
       <file file_name="STM32L4xx/Device/Source/system_stm32l4xx.c">
         <configuration

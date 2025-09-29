@@ -1,0 +1,2 @@
+Output/Debug/Obj/lab4_ek/STM32L4xx_Startup.o: \
+ C:\Users\ekendrick\Documents\GitHub\e155-lab4\lab4_ek\STM32L4xx\Source\STM32L4xx_Startup.s
