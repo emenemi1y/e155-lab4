@@ -47,8 +47,9 @@ typedef struct
 
 // Function Prototypes
 
-void initTIM15();
-void setPrescaler(int val);
+void initTIM15(void);
+void enablePWM(int f);
+int getStatusTIM15(void);
 
 
 #endif

@@ -17,6 +17,8 @@ void delay (int val) {
   TIM16->ARR = (int) 100000 * val;
 
   // wait until clock reaches ARR value 
+
+  while(
 }
 
 
