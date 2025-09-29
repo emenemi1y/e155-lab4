@@ -15,22 +15,6 @@
 #define SPEAKER_PIN        3 // change later
 
 
-void initTIM(int timer)
-{
-  // enable the timer 
-  // 
-}
-
-
-
-void delay_millis(TIM_TypeDef * TIMx, uint32_t ms);
-
-void initPWM(int freq, int dur)
-
-
-
-
-
 int main(void) {
   // Turn on clock to GPIOB
   RCC->AHB2ENR |= (1 << 1);
@@ -41,5 +25,8 @@ int main(void) {
   // set SPEAKER_PIN as output
   pinMode(SPEAKER_PIN, GPIO_OUTPUT);
 
-  // disable slave mode controller register (to set clock source to CK_INT)
+  // iterate through notes and delays 
+
+
+  
 

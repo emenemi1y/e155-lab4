@@ -46,7 +46,8 @@ typedef struct
 
 
 // Function Prototypes
-void initTIM16();
-
+void initTIM16 (void);
+int getStatusTIM16 (void);
+void delay (int val);
 
 #endif

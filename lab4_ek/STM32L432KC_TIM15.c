@@ -7,22 +7,29 @@ void initTIM15() {
   // disable slave mode controller register (to set clock source to CK_INT)
   TIM15->SMCR &= ~(111 << 0);
 
+  // enable timer
+  TIM15->CR1 |= (1 << 0);
+
+  // enable PWM mode 1
+  TIM15->CCMR1 &= ~(1 << 4);
+  TIM15->CCMR1 |= (1 << 5);
+  TIM15->CCMR1 |= (1 << 6);
 }
 
-void setPrescaler(int val) {
-  TIM15->PSC = val;
+void enablePWM(int f){
+  // set frequency in arr 
+  // if clock is 4 MHz
+
+  int arr_val = (int) 4000000 / f; // number of clock cycles per period 
+  int dc = (int) arr_val / 2;      // duty cycle
+
+  TIM15->ARR = arr_val;
+  TIM15->CCR1 = dc;
+
 }
 
-void setAutoReload(int val) {
-  TIM15->ARR = val;
-}
 
+int getStatusTIM15() {
+  return (TIM15->SR >> 0) & 1;
 
-void enableCounter(int en) {
-  
-}
-
-int getStatus() {
-  return ((TIM15->
-  return ((GPIO->IDR) >> pin) & 1;
 }

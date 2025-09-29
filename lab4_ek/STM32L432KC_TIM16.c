@@ -3,22 +3,24 @@
 
 #include "STM32L432KC_TIM16.h"
 
-void initTIM16() {  
+void initTIM16 (void) {  
   // enable counter
   TIM16->CR1 |= (1 << 0);
 
+  // slow clock to 100 kHz
+  TIM16->PSC = 39;
+
 }
 
-void setPrescaler(int val) {
-  TIM16->PSC = val;
+void delay (int val) {
+  // set value of ARR 
+  TIM16->ARR = (int) 100000 * val;
+
+  // wait until clock reaches ARR value 
 }
 
-void setAutoReload(int val) {
-  TIM16->ARR = val;
-}
 
-
-int getStatusTIM16() {
+int getStatusTIM16 (void) {
   return (TIM16->SR >> 0) & 1;
 }
 
