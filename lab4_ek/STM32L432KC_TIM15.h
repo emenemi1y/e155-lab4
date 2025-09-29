@@ -47,6 +47,7 @@ typedef struct
 
 // Function Prototypes
 
+void initTIM15();
 void setPrescaler(int val);
 
 

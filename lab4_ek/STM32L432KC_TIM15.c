@@ -1,11 +1,11 @@
-// STM32L432KC_GPIO.c
-// Source code for GPIO functions 
+// STM32L432KC_TIM15.c
+// Source code for TIM15 functions 
 
 #include "STM32L432KC_TIM15.h"
 
 void initTIM15() {
   // disable slave mode controller register (to set clock source to CK_INT)
-  TIM15->SMCR
+  TIM15->SMCR &= ~(111 << 0);
 
 }
 

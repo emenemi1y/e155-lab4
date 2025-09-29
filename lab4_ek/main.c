@@ -14,25 +14,18 @@
 
 #define SPEAKER_PIN        3 // change later
 
-// arbitrary numbers 
-#define TIMER15 1
-#define TIMER16 2
 
 void initTIM(int timer)
 {
-  switch(timer){
-    case TIMER15:
-      initTIM15();
-      break;
-    case TIMER16:
-      initTIM16();
-      break;
-  }
+  // enable the timer 
+  // 
 }
 
 
 
 void delay_millis(TIM_TypeDef * TIMx, uint32_t ms);
+
+void initPWM(int freq, int dur)
 
 
 
