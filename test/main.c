@@ -42,6 +42,7 @@ int main(void) {
     // Blink LED
     while(1) {
         delayTIM15(DELAY_DURATION_MS);
+        //  ms_delay(DELAY_DURATION_MS);
         togglePin(LED_PIN);
     }
     return 0;

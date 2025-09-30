@@ -10,6 +10,8 @@ void initTIM15(void) {
   // enable timer
   TIM15->CR1 |= (1 << 0);
 
+  TIM15->CR1 &= ~(1 << 1);
+
   // slow clock to 1.25 MHz
   TIM15->PSC = 63;
 }
@@ -32,7 +34,7 @@ void delayTIM15 (int val) {
   while(~(getStatusTIM15())) {
     __asm("nop");
   }
-  TIM15->SR &= ~(1 << 0);
+  TIM15->SR &= ~(1 << 0); // clear 
   disableTIM15();
 }
 
