@@ -7,13 +7,14 @@ void initTIM15(void) {
   // disable slave mode controller register (to set clock source to CK_INT)
   TIM15->SMCR &= ~(111 << 0);
 
+  // slow clock to 100 kHz
+  TIM15->PSC = (uint32_t) 0;
+  
+  // generate update event 
+  TIM15->EGR |= 1;
+
   // enable timer
   TIM15->CR1 |= (1 << 0);
-
-  TIM15->CR1 &= ~(1 << 1);
-
-  // slow clock to 1.25 MHz
-  TIM15->PSC = 63;
 }
 
 void disableTIM15(void) {
@@ -27,19 +28,24 @@ void enableTIM15(void) {
 
 void delayTIM15 (int val) {
   // set value of ARR 
-  TIM15->ARR = (int) (1250000 * ((float) val / 1000));
+  TIM15->ARR = (uint32_t) (10 * val);
 
   // wait until clock reaches ARR value 
-  enableTIM15();
-  while(~(getStatusTIM15())) {
+  // enableTIM15();
+
+  TIM15->EGR |= (1 << 0); // force update
+  TIM15->SR &= ~(1 << 0); // reset uif bit
+  TIM15->CNT = 0;         // set count to zero
+
+  while(!(getStatusTIM15())) {
     __asm("nop");
   }
-  TIM15->SR &= ~(1 << 0); // clear 
+
   disableTIM15();
 }
 
-
+// get UIF
 int getStatusTIM15(void) {
-  return (TIM15->SR >> 0) & 1;
+  return ((TIM15->SR >> 0) & 1);
 
 }

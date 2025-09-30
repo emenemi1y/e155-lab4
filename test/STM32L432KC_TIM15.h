@@ -11,7 +11,7 @@
 #define __IO volatile
 
 // Base addresses
-#define TIM15_BASE (0x40013C00ULL)
+#define TIM15_BASE (0x40014000UL)
 
 typedef struct
 {

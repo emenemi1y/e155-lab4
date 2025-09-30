@@ -33,16 +33,19 @@ int main(void) {
     RCC->APB2ENR |= (1 << 16); // TIM15 EN
     RCC->APB2ENR |= (1 << 17); // TIM16 EN
 
+    initTIM15();
+
     // Turn on clock to GPIOB
     RCC->AHB2ENR |= (1 << 1);
 
     // Set LED_PIN as output
     pinMode(LED_PIN, GPIO_OUTPUT);
+    digitalWrite(LED_PIN, GPIO_LOW);
 
     // Blink LED
     while(1) {
         delayTIM15(DELAY_DURATION_MS);
-        //  ms_delay(DELAY_DURATION_MS);
+        // ms_delay(DELAY_DURATION_MS);
         togglePin(LED_PIN);
     }
     return 0;
