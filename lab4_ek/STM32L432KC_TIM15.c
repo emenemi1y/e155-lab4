@@ -10,6 +10,9 @@ void initTIM15(void) {
   // enable timer
   TIM15->CR1 |= (1 << 0);
 
+  // slow clock to 1 MHz
+  TIM15->PSC = 3;
+
   // enable PWM mode 1
   /*
   TIM15->CCMR1 &= ~(1 << 4);
@@ -17,6 +20,27 @@ void initTIM15(void) {
   TIM15->CCMR1 |= (1 << 6);
   */
 }
+
+void disableTIM15(void) {
+  TIM15->CR1 &= ~(1 << 0);
+}
+
+void enableTIM15(void) {
+  TIM15->CR1 |= (1 << 0);
+}
+
+void delayTIM15 (int val) {
+  // set value of ARR 
+  TIM15->ARR = (int) 1000000 * (int) ((float) val / 1000);
+
+  // wait until clock reaches ARR value 
+  enableTIM15();
+  while(~((TIM15-> SR >> 0) & 1)) {
+    __asm("nop");
+  }
+  disableTIM15();
+}
+
 
 
 /*

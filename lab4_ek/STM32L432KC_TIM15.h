@@ -49,7 +49,8 @@ typedef struct
 
 void initTIM15(void);
 void enablePWM(int f);
-int getStatusTIM15(void);
+int getStatusTIM15(void); 
+void delayTIM15(int val);
 
 
 #endif

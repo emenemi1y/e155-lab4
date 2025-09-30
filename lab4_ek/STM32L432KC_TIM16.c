@@ -12,13 +12,28 @@ void initTIM16 (void) {
 
 }
 
-void delay (int val) {
+// val in ms
+void delayTIM16 (int val) {
   // set value of ARR 
-  TIM16->ARR = (int) 100000 * val;
+  TIM16->ARR = (int) 100000 * (int) ((float) val / 1000);
 
   // wait until clock reaches ARR value 
+  TIM16->CR1 |= (1 << 0);
+  while(~((TIM16-> SR >> 0) & 1)) {
+    __asm("nop");
+  }
+}
 
-  while(
+void disableTIM16(void) {
+  TIM16->CR1 &= ~(1 << 0);
+}
+
+void enableTIM16(void) {
+  TIM16->CR1 |= (1 << 0);
+}
+
+void setARR16(int val) {
+  TIM16->ARR = val;
 }
 
 

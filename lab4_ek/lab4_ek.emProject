@@ -66,6 +66,9 @@
     <folder Name="Source Files">
       <configuration Name="Common" filter="c;cpp;cxx;cc;h;s;asm;inc" />
       <file file_name="main.c" />
+      <file file_name="STM32L432KC_FLASH.c" />
+      <file file_name="STM32L432KC_FLASH.h" />
+      <file file_name="STM32L432KC_RCC.c" />
       <file file_name="STM32L432KC_TIM16.c" />
     </folder>
     <folder Name="System Files">
