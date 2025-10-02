@@ -4,48 +4,35 @@
 #include "STM32L432KC_TIM15.h"
 
 void initTIM15(void) {
-  // disable slave mode controller register (to set clock source to CK_INT)
-  TIM15->SMCR &= ~(111 << 0);
+  // Slow clock such that one time unit = 1 Us (assuming 80 MHz clock)
+  TIM15->PSC = (uint32_t) (80000000/1e6 - 1);
 
-  // slow clock to 100 kHz
-  TIM15->PSC = (uint32_t) 0;
+  // Disable generation of uif for anything other than counter overflow
+  TIM15->CR1 |= (1 << 2);
   
-  // generate update event 
+  // Generate update event 
   TIM15->EGR |= 1;
 
-  // enable timer
+  // Enable timer
   TIM15->CR1 |= (1 << 0);
-}
 
-void disableTIM15(void) {
-  TIM15->CR1 &= ~(1 << 0);
-}
-
-void enableTIM15(void) {
-  TIM15->CR1 |= (1 << 0);
-  TIM15->SR &= ~(1 << 0);
+  // Reset uif bit 
+  TIM15->SR &= ~(0x1);
 }
 
 void delayTIM15 (int val) {
-  // set value of ARR 
-  TIM15->ARR = (uint32_t) (10 * val);
 
-  // wait until clock reaches ARR value 
-  // enableTIM15();
+  TIM15->ARR = val;    // Set timer max count
+  TIM15->EGR |= 1;     // Force update
+  TIM15->SR &= ~(0x1); // Clear UIF
 
-  TIM15->EGR |= (1 << 0); // force update
-  TIM15->SR &= ~(1 << 0); // reset uif bit
-  TIM15->CNT = 0;         // set count to zero
+  // Wait until ARR value is reached 
+  while(!(TIM15->SR & 1));
 
-  while(!(getStatusTIM15())) {
-    __asm("nop");
-  }
-
-  disableTIM15();
 }
 
-// get UIF
+// Get UIF
 int getStatusTIM15(void) {
-  return ((TIM15->SR >> 0) & 1);
+  return (TIM15->SR & 1);
 
 }

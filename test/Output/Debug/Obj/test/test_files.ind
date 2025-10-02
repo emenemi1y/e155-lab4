@@ -4,6 +4,7 @@
 "Output/Debug/Obj/test/STM32L432KC_GPIO.o"
 "Output/Debug/Obj/test/STM32L432KC_RCC.o"
 "Output/Debug/Obj/test/STM32L432KC_TIM15.o"
+"Output/Debug/Obj/test/STM32L432KC_TIM16.o"
 "Output/Debug/Obj/test/SEGGER_THUMB_Startup.o"
 "Output/Debug/Obj/test/stm32l432xx_Vectors.o"
 "Output/Debug/Obj/test/STM32L4xx_Startup.o"

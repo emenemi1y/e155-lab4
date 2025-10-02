@@ -9,19 +9,122 @@
 #include "STM32L432KC_GPIO.h"
 #include "STM32L432KC_FLASH.h"
 #include "STM32L432KC_TIM15.h"
+#include "STM32L432KC_TIM16.h"
 
 // Define macros for constants
-#define LED_PIN           5
-#define DELAY_DURATION_MS    200
+#define SPEAKER_PIN 5
 
-// Function for dummy delay by executing nops
-void ms_delay(int ms) {
-   while (ms-- > 0) {
-      volatile int x=1000;
-      while (x-- > 0)
-         __asm("nop");
-   }
-}
+const int notes[][2] = {
+{659,	125},
+{623,	125},
+{659,	125},
+{623,	125},
+{659,	125},
+{494,	125},
+{587,	125},
+{523,	125},
+{440,	250},
+{  0,	125},
+{262,	125},
+{330,	125},
+{440,	125},
+{494,	250},
+{  0,	125},
+{330,	125},
+{416,	125},
+{494,	125},
+{523,	250},
+{  0,	125},
+{330,	125},
+{659,	125},
+{623,	125},
+{659,	125},
+{623,	125},
+{659,	125},
+{494,	125},
+{587,	125},
+{523,	125},
+{440,	250},
+{  0,	125},
+{262,	125},
+{330,	125},
+{440,	125},
+{494,	250},
+{  0,	125},
+{330,	125},
+{523,	125},
+{494,	125},
+{440,	250},
+{  0,	125},
+{494,	125},
+{523,	125},
+{587,	125},
+{659,	375},
+{392,	125},
+{699,	125},
+{659,	125},
+{587,	375},
+{349,	125},
+{659,	125},
+{587,	125},
+{523,	375},
+{330,	125},
+{587,	125},
+{523,	125},
+{494,	250},
+{  0,	125},
+{330,	125},
+{659,	125},
+{  0,	250},
+{659,	125},
+{1319,	125},
+{  0,	250},
+{623,	125},
+{659,	125},
+{  0,	250},
+{623,	125},
+{659,	125},
+{623,	125},
+{659,	125},
+{623,	125},
+{659,	125},
+{494,	125},
+{587,	125},
+{523,	125},
+{440,	250},
+{  0,	125},
+{262,	125},
+{330,	125},
+{440,	125},
+{494,	250},
+{  0,	125},
+{330,	125},
+{416,	125},
+{494,	125},
+{523,	250},
+{  0,	125},
+{330,	125},
+{659,	125},
+{623,	125},
+{659,	125},
+{623,	125},
+{659,	125},
+{494,	125},
+{587,	125},
+{523,	125},
+{440,	250},
+{  0,	125},
+{262,	125},
+{330,	125},
+{440,	125},
+{494,	250},
+{  0,	125},
+{330,	125},
+{523,	125},
+{494,	125},
+{440,	500},
+{  0,	0}};
+
 
 int main(void) {
     // Configure flash to add waitstates to avoid timing errors
@@ -38,15 +141,37 @@ int main(void) {
     // Turn on clock to GPIOB
     RCC->AHB2ENR |= (1 << 1);
 
-    // Set LED_PIN as output
-    pinMode(LED_PIN, GPIO_OUTPUT);
-    digitalWrite(LED_PIN, GPIO_LOW);
-
-    // Blink LED
-    while(1) {
-        delayTIM15(DELAY_DURATION_MS);
-        // ms_delay(DELAY_DURATION_MS);
-        togglePin(LED_PIN);
+    // Set SPEAKER_PIN as output
+    pinMode(SPEAKER_PIN, GPIO_OUTPUT);
+    digitalWrite(SPEAKER_PIN, 1);
+    
+    // Play notes
+    int period; // period in ms
+    /*
+    period = (int) (500000 / notes[0][0]);
+    int num = 1000;
+    while(1){
+      delayTIM15(period);
+      togglePin(SPEAKER_PIN);
     }
+    */
+
+
+    //for (int i = 0; i < (sizeof(notes) / sizeof(notes[0])); i++){
+    int status;
+    for (int i = 0; i < 1; i++){
+      initDelayTIM16((int) (notes[i][1]));
+      period = (int) (500000 / notes[i][0]);
+      status = getStatusTIM16();
+      while(!(getStatusTIM16())){
+        delayTIM15(period);
+        togglePin(SPEAKER_PIN);
+        status = getStatusTIM16();
+      }
+    }
+
+    digitalWrite(SPEAKER_PIN, 0);
+    
     return 0;
+    
 }
