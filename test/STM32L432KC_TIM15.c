@@ -31,6 +31,19 @@ void delayTIM15 (int val) {
 
 }
 
+void initTIM15PWM(void){
+  
+
+}
+
+void setPWM(int f, int dc){
+  TIM15->CCMR1 &= ~(1 << 4);
+  TIM15->CCMR1 |= (1 << 5);
+  TIM15->CCMR1 |= (1 << 6);
+
+  
+}
+
 // Get UIF
 int getStatusTIM15(void) {
   return (TIM15->SR & 1);
