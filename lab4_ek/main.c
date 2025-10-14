@@ -195,12 +195,30 @@ int main(void) {
     RCC->AHB2ENR |= (1 << 1);
 
     // Set LED_PIN as output
-    pinMode(3, GPIO_OUTPUT);
+    pinMode(SPEAKER_PIN, GPIO_OUTPUT);
+
+    TIM15->CR1 |= (1 << 0);
+
+    // Enable PWM output
+
+    TIM15->CCMR1 &= ~(1 << 4);
+    TIM15->CCMR1 |= (1 << 5);
+    TIM15->CCMR1 |= (1 << 6);
+
+    TIM15->BDTR |= (1 << 15); // Set MOE
+
+    TIM15->CCER |= (1 << 0); // Capture/Compare 1 output enable
+
+    TIM15->ARR = 133333;
+    TIM15->CCR1 = 66666;
+    
 
     // Blink LED
+    /*
     while(1) {
         ms_delay(200);
         togglePin(3);
     }
+    */
     return 0;
 }

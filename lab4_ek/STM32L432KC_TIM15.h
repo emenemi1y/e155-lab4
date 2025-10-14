@@ -51,6 +51,7 @@ void initTIM15(void);
 void enablePWM(int f);
 int getStatusTIM15(void); 
 void delayTIM15(int val);
+void enableTIM15(void);
 
 
 #endif
