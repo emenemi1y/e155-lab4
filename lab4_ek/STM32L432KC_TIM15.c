@@ -7,11 +7,14 @@ void initTIM15(void) {
   // disable slave mode controller register (to set clock source to CK_INT)
   TIM15->SMCR &= ~(111 << 0);
 
+  // slow clock to 1 MHz
+  TIM15->PSC = (uint32_t) ((80000000/1e6));
+
+  TIM15->EGR |= 1;
+
   // enable timer
   TIM15->CR1 |= (1 << 0);
 
-  // slow clock to 1 MHz
-  TIM15->PSC = 3;
 
   // enable PWM mode 1
   /*
