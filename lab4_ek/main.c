@@ -12,7 +12,6 @@
 #include "STM32L432KC_FLASH.h"
 #include "STM32L432KC_FLASH.h"
 
-
 #define SPEAKER_PIN 5;
 
 const int notes[][2] = {
@@ -191,27 +190,21 @@ int main(void) {
     // Setup the PLL and switch clock source to the PLL
     configureClock();
 
-    // Turn on clock to GPIOA
+    // Turn on clock to GPIOB
     RCC->AHB2ENR |= (1 << 1);
 
     // Enable timers 
-    RCC->APB2ENR |= (1 << 16);
-    RCC->APB2ENR |= (1 << 15);
+    RCC->APB2ENR |= (1 << 16); // TIM15 enable
+    RCC->APB2ENR |= (1 << 17); // TIM16 enable
 
-    // Set LED_PIN as output
-    GPIO->MODER &= ~(0b0 << 2*SPEAKER_PIN);
-    GPIO->MODER |= (0b1 << 2*SPEAKER_PIN + 1);
+    // Set SPEAKER_PIN as output
+    GPIO->MODER |= (0b01 << 10);
 
-    TIM15->EGR |= 1;
-
-    // enable timer
-    TIM15->CR1 |= (1 << 0);
+    // Timer configuration:
+    initTIM15();
 
     // Enable PWM output
-
-    TIM15->CCMR1 &= ~(1 << 4); // OC1M v
-    TIM15->CCMR1 |= (1 << 5);
-    TIM15->CCMR1 |= (1 << 6);
+    TIM15->CCMR1 |= (0b110 << 4); // OC1M
 
     TIM15->BDTR |= (1 << 15); // Set MOE
 
@@ -219,16 +212,15 @@ int main(void) {
 
     TIM15->CR1 |= (1 << 7); // ARPE bit in CR1
 
-    TIM15->EGR |= (1 << 0); // Reset registers by setting update bit 
-
     TIM15->CCER |= (1 << 0); // CC1 output enable
     TIM15->CCER |= (1 << 2); // CC1 complementary output enable 
 
-
-
-    TIM15->ARR = 1666;
-    TIM15->CCR1 = 830;
+    TIM15->ARR = 19999;
+    TIM15->CCR1 = 9999;
     
+    TIM15->EGR |= (1 << 0); // Reset registers by setting update bit 
+
+
 
     // Blink LED
     /*
