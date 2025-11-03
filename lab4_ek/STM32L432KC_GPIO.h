@@ -13,7 +13,7 @@
 #define GPIO_HIGH  1
 
 // Base addresses for GPIO ports
-#define GPIO_BASE (0x48000400UL)
+#define GPIO_BASE (0x48000000UL)
 
 // GPIO functions for pinMode()
 #define GPIO_INPUT  0
