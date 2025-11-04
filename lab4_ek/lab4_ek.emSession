@@ -62,14 +62,14 @@
   <SessionOpenFile windowGroup="DockEditLeft" x="12" y="11" useTextEdit="1" path="STM32L432KC_GPIO.c" left="0" top="0" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="13" y="53" useTextEdit="1" path="STM32L432KC_TIM16.h" left="0" top="11" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="24" y="17" useTextEdit="1" path="STM32L432KC_TIM16.c" left="0" top="10" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="42" y="10" useTextEdit="1" path="STM32L432KC_TIM15.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="5" y="5" useTextEdit="1" path="STM32L432KC_TIM15.c" left="0" top="0" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="30" y="13" useTextEdit="1" path="STM32L432KC_TIM15.h" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="6" y="82" useTextEdit="1" path="STM32L432KC_RCC.h" left="0" top="37" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="6" y="82" useTextEdit="1" path="STM32L432KC_RCC.h" left="0" top="39" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="19" y="24" useTextEdit="1" path="Output/Debug/Exe/lab4_ek.map" left="0" top="0" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="24" y="45" useTextEdit="1" path="STM32L432KC_RCC.c" left="0" top="7" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="24" y="5" useTextEdit="1" path="STM32L432KC_FLASH.c" left="0" top="0" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="27" y="18" useTextEdit="1" path="STM32L432KC_FLASH.h" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="30" y="226" useTextEdit="1" folds0="16" path="main.c" left="0" selected="1" top="92" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="28" y="229" useTextEdit="1" folds0="16" path="main.c" left="0" selected="1" top="85" codecName="Default"/>
  </Files>
- <EMStudioWindow activeProject="lab4_ek" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="" debugSearchPath="" autoConnectCapabilities="3711"/>
+ <EMStudioWindow activeProject="lab4_ek" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>
