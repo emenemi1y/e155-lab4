@@ -192,6 +192,7 @@ int main(void) {
 
     // Turn on clock to GPIOB
     RCC->AHB2ENR |= (1 << 1);
+    RCC->AHB2ENR |= (1 << 0);
 
     // Enable timers 
     RCC->APB2ENR |= (1 << 16); // TIM15 enable
@@ -199,35 +200,39 @@ int main(void) {
 
     // Set SPEAKER_PIN as output
     //GPIO->MODER |= (0b01 << 10);
+    // Set speaker pin as alternate function --> TIM15 CH1 on PA2
+    GPIO->MODER |= (0b10 << 4);
+    GPIO->AFRL |= (1110 << 8);
 
-    TIM15->ARR = 19999;
-    TIM15->CCR1 = 9999;
+    TIM15->ARR |= (19999 << 0);
+    TIM15->CCR1 |= (9999 << 0);
 
     // Timer configuration:
-    initTIM15();
+    //initTIM15();
 
     // Enable PWM output
     TIM15->CCMR1 |= (0b110 << 4); // OC1M
-    // TIM15->CCMR1 |= (0b1 << 3); // OC1PE
+    TIM15->CCMR1 |= (0b1 << 3); // OC1PE
     TIM15->CR1 |= (0b1 << 7); // ARPE
 
     TIM15->BDTR |= (1 << 15); // Set MOE
 
-    TIM15->BDTR |= (1 << 11); // OSSR bit in BDTR
+    //TIM15->BDTR |= (1 << 11); // OSSR bit in BDTR
 
-    TIM15->BDTR |= (1 << 10); // OSSI bit in BDTR
+    //TIM15->BDTR |= (1 << 10); // OSSI bit in BDTR
 
-    // TIM15->CCER |= (1 << 0); // CC1 output enable
+    TIM15->CCER |= (1 << 0); // CC1 output enable
+    TIM15->CCER |= (1 << 1); 
     // TIM15->CCER |= (1 << 2); // CC1 complementary output enable 
 
 
     // SET COUNT TO 0
     
     TIM15->EGR |= (1 << 0); // Reset registers by setting update bit 
+    TIM15->CNT &= ~(0b1111111111111111 << 0); 
+    TIM15->CR1 |= (1 << 0);
     
-    // Set speaker pin as alternate function --> TIM15 CH1 on PA2
-    GPIO->MODER |= (0b10 << 4);
-    GPIO->AFRL |= (1110 << 8);
+
     
 
     // Blink LED

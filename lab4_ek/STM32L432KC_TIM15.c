@@ -13,7 +13,7 @@ void initTIM15(void) {
   TIM15->EGR |= 1;
 
   // enable timer
-  TIM15->CR1 |= (1 << 0);
+  // TIM15->CR1 |= (1 << 0);
 
 
   // enable PWM mode 1
